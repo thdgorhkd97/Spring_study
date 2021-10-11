@@ -4,14 +4,17 @@ import com.example.study.Ifs.CrudInterface;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.UserApiRequest;
 import com.example.study.model.network.response.UserApiResponse;
+import com.example.study.model.network.response.UserOrderInfoApiResponse;
 import com.example.study.service.UserApiLogicService;
 
-import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.common.util.impl.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j // log로 확인
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserApiController implements CrudInterface<UserApiRequest, UserApiResponse> {
@@ -20,6 +23,15 @@ public class UserApiController implements CrudInterface<UserApiRequest, UserApiR
     @Autowired
     private UserApiLogicService userApiLogicService;
 
+    @GetMapping("/{id}/orderInfo")
+    public Header<UserOrderInfoApiResponse> orderInfo(@PathVariable Long id){
+        return userApiLogicService.orderInfo(id);
+    }
+
+    @GetMapping("")
+    public Header<List<UserApiResponse>> search(@PageableDefault(sort = "id",direction = Sort.Direction.ASC, size = 15) Pageable pageable){
+        return userApiLogicService.search(pageable);
+    }
 
     @Override
     @PostMapping("") //    /api/user 로 매핑

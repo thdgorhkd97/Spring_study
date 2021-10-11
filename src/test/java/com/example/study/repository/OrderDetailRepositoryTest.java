@@ -2,8 +2,6 @@ package com.example.study.repository;
 
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.OrderDetail;
-import jdk.vm.ci.meta.Local;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.junit.Test;
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
