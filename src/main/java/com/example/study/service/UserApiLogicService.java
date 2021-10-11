@@ -12,6 +12,7 @@ import com.example.study.model.network.response.OrderGroupApiResponse;
 import com.example.study.model.network.response.UserApiResponse;
 import com.example.study.model.network.response.UserOrderInfoApiResponse;
 import com.example.study.repository.UserRepository;
+import javafx.scene.control.Pagination;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -141,6 +142,13 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
         List<UserApiResponse> userApiResponseList = users.stream()
                 .map(user -> response(user))
                 .collect(Collectors.toList());
+
+        /*Pagination pagination = Pagination.builder()
+                .totalPages(users.getTotalPages())
+                .totalElements(users.getTotalElements())
+                .currentPage(users.getNumber())
+                .currentElements(users.getNumberOfElements())
+                .build();*/
 
         return Header.OK(userApiResponseList);
    }
